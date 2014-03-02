@@ -1,0 +1,149 @@
+<!DOCTYPE html> 
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1,
+user-scalable=no"/>
+	
+<title>Formulario de registro</title>
+
+<link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.1/jquery.mobile-1.3.1.min.css" />
+<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+<script src="http://code.jquery.com/mobile/1.3.1/jquery.mobile-1.3.1.min.js"></script>
+
+<script type="text/javascript" src="../../js/sha.js"></script>
+<script type="text/javascript" src="../../js/sha256.js"></script>
+
+</head>
+   
+<body>
+<div data-role="page" >
+        <div data-role="header">
+          	<h1>Nuevo usuario</h1>
+            <a href="../../index.php"  data-icon="arrow-l" data-role="button" data-theme="b">Volver</a>
+        	<input type="submit" id="submit" class="ui-btn-right" value="Enviar" data-icon="edit" data-iconpos="right" data-theme="b" />
+        </div>
+        
+        
+<div data-role="content">
+<script>
+function onSuccess(response, status)
+{
+	response = $.trim(response);
+	$("#Signupform").each(function()
+	{
+    	this.reset();
+	});
+	$("#message").html(response);
+	
+	window.setTimeout(function() 
+		{
+			$("#popupBasic").popup("close");
+			$("#message").text("");
+		}, 3000);	
+}
+  
+function onError(retorno, status)
+{
+	var ajax_error="Error Ajax";
+	$("#message").text(ajax_error);
+}        
+  
+$(document).ready(function() {
+	$("#submit").click(function(){
+		$("#popupBasic").popup("open");	
+		var pass;
+		var v_pass;
+		var pass_cyph;
+		var v_pass_cyph;
+		var data;
+		
+		pass=$.trim($("#password").val().toString());
+		v_pass=$.trim($("#v_password").val().toString());
+		
+		if(pass===""){
+			var empty_pass="No se permiten contraseñas vacias";
+			onSuccess(empty_pass, null);		
+		}else if(v_pass===""){
+			var empty_vpassword="Verifique su contraseña";
+			onSuccess(empty_vpassword,null);
+		}else{
+			//comienza el hash de las contraseñas
+			var shaObj_pass = new jsSHA(pass, "TEXT");
+			pass_cyph = shaObj_pass.getHash("SHA-256", "HEX");
+			var shaObj_v_pass = new jsSHA(v_pass, "TEXT");
+			v_pass_cyph = shaObj_v_pass.getHash("SHA-256", "HEX");
+			//hash completado
+			
+			//preparar los datos POST
+			data=
+			{
+				username: $("#username").val(),
+				email: $("#email").val(),
+				password: pass_cyph,
+				v_password: v_pass_cyph
+			}
+			//Petición Ajax
+			$.ajax({
+				type: "POST",
+				url: "../../lib/register.php",
+				cache: false,
+				data: data,
+				success: onSuccess,
+				error: onError
+			});
+			//Limpiar las variables
+			pass=v_pass=pass_cyph=v_pass_cyph=data=null;
+			return false;
+		}
+	});
+});
+</script>
+<script>
+console.log("script ejecutado signup");
+</script>  
+
+<form id="Signupform">
+<div data-role="fieldcontain">
+    <label for="username">Nombre de usuario:</label>
+    <input name="username" id="username" type="text" placeholder="Nombre de usuario" value="" data-mini="true" required>
+
+    <label for="email">E-mail:</label>
+    <input name="email" id="email" type="text" placeholder="Dirección e-mail válida" value="" data-mini="true" required>
+
+    <label for="password">Contraseña:</label>
+    <input name="password" id="password" type="password" placeholder="Contraseña" data-mini="true" value="" required>
+	
+    <label for="v_password">Repita la contraseña:</label>
+    <input name="v_password" id="v_password" type="password" placeholder="Repita Contraseña" value="" data-mini="true" required>
+</div>
+<br/>
+</form>
+
+
+<div data-role="popup" id="popupBasic" data-overlay-theme="a" data-theme="c" style="max-width:400px;" class="ui-corner-all">
+
+	<div data-role="header" data-theme="a" class="ui-corner-top">
+  		<h1>Registrando usuario</h1>
+  	</div>
+			
+	<div data-role="content" data-theme="d" class="ui-corner-bottom ui-content">
+		<h3 class="ui-title">El proceso puede tardar unos segundos</h3>
+    	<p>Espere por favor.</p>
+        <br> 
+        <div id="message"></div>
+    </div>
+    
+</div>
+        
+         
+               
+</div>
+               
+        <div data-role="footer" data-position="fixed">
+            <h1>Pie de pagina</h1>
+        </div>
+        
+    </div>
+</body>  
+</html>

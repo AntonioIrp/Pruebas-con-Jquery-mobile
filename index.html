@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Portal</title>
+
+<!--<script src="jquery-1.6.4.min.js" type="text/javascript"></script>-->
+
+
+<script type="text/javascript"> 
+	var dispositivo = navigator.userAgent.toLowerCase(); 
+	
+	if( dispositivo.search(/iphone|ipod|ipad|android/) > -1 )
+	{ 
+		document.location = "mobile/index.php";  
+	}
+	else
+	{
+		document.location = "desktop/index.html";
+	}
+</script> 
+
+
+</head>
+
+
+<body>
+
+<p>Se comprueba si el cliente es movil y se accede al sitio web adecuado...</p>
+
+</body>
+</html>

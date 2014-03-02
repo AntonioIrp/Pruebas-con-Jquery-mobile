@@ -1,0 +1,52 @@
+@charset "utf-8";
+#index_page {
+	background-position: center center;
+	background-size: cover;
+	background-image: url(../images/zen.jpg);
+}
+#login_page {
+	background-position: center center;
+	background-size: cover;
+	background-image: url(../images/background.png);
+	opacity: 1;
+	visibility: visible;
+
+}
+#back_to_index_button {
+	width: 90px;
+}
+#info_buttons {
+	width: 60%;
+	margin-left: 20%;
+	margin-right: 20%;
+
+}
+#login_submit_button {
+	bottom: 3em;
+	position: fixed;
+	width: 70%;
+	text-align: center;
+	margin-left: 15%;
+	margin-right: 15%;
+}
+#login_form {
+	position: fixed;
+	bottom: 7em;
+	width: 90%;
+	margin-left: 5%;
+	margin-right: 5%;
+}
+#signup_page {
+	bottom: 5em;
+	position: fixed;
+	background-image: url(../images/background.png);
+	background-position: center center;
+	background-size: cover;
+}
+#signup_form {
+	bottom: 7em;
+	position: fixed;
+	width: 90%;
+	margin-left: 5%;
+	margin-right: 5%;
+}

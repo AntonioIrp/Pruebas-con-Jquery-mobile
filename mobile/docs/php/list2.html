@@ -1,0 +1,59 @@
+<!DOCTYPE html> 
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1,
+user-scalable=no"/>
+
+<title>Aplic. Web de jQuery Mobile</title>
+
+<link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.1/jquery.mobile-1.3.1.min.css" />
+<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+<script src="http://code.jquery.com/mobile/1.3.1/jquery.mobile-1.3.1.min.js"></script>
+<script src="../../js/generateList.js"></script>
+</head> 
+
+<body>
+
+<div data-role="page" id="page">
+	<div data-role="header">
+		<h1>listado list.html</h1>
+        <a href="welcome.php" data-role="button">volver a welcome</a>       
+	</div>
+	<div data-role="content">	
+		<ul data-role="listview" data-split-icon="delete">
+			<li>entrada 1</li>
+            <li>entrada 2</li>
+        </ul>
+        
+        
+        <ul  id="listadito" data-inset="true" data-role="listview"></ul> 
+<script>
+console.log("comienzo del listado");
+
+$(document).ready(function(){
+	var moviesInfoFile = "../../movie-details-with-video.json";
+	$.getJSON(moviesInfoFile, function(movies)
+	{
+		$("#listadito").empty();
+
+		$.each(movies, function(i, movie)
+		{
+   			$("#listadito").append(generarLista(movie));
+   
+		});
+		
+		$("#listadito").listview('refresh');	
+	});
+});
+</script>   
+	</div>
+	<div data-role="footer">
+		<h4>Pie de página</h4>
+	</div>
+</div>
+</body>
+</html>
+
+
+           		

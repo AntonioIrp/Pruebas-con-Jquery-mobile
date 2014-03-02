@@ -1,0 +1,40 @@
+@charset "utf-8";
+#login_submit_button {
+	bottom: 1em;
+	position: fixed;
+	width: auto;
+	margin-left: auto;
+	margin-right: auto;
+	left: 6%;
+	right: 6%;
+}
+
+#login_email_field {
+	width: 100%;
+	position: fixed;
+	bottom: 7.2em;
+}
+#login_password_field {
+	bottom: 5em;
+	position: fixed;
+	width: 100%;
+}
+#login_back_button {
+	width: 7em;
+	position: fixed;
+	margin-left: 0.3em;
+
+
+}
+#Login {
+	background-image: url(../images/zen.jpg);
+	background-position: 0% 0%;
+	background-size: cover;
+	background-attachment: scroll;
+	position: fixed;
+}
+#login_status {
+	bottom: 5em;
+	position: fixed;
+	color: #FFFFFF;
+}
